@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - PEM-ITA</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="header-div">
+      <div id="img-logo">
+        <a href="/"><img id="logo" src="Logo_Editada.png" alt="Logo_Pem_Ita" /></a>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="/">Mapa</a>
+    <a href="/sobre">Sobre</a>
+    <a href="/info">Informações</a>
+
+    <th:block th:if="${usuarioLogado == null}">
+        <a href="/login">Login</a>
+    </th:block>
+
+    <th:block th:if="${usuarioLogado != null}">
+        <span>Bem-vindo, <strong th:text="${usuarioLogado}"></strong></span>
+        <a href="/logout">Sair</a>
+    </th:block>
+
+    <th:block th:if="${usuarioLogado == 'Ana'}">
+        <a href="/cadastro">Cadastro</a>
+        <a href="/ponto">AddPonto</a>
+    </th:block>
+</nav>
+
+  <section class="login-container">
+
+    <div class="imagem-login">
+      <img class="foto-login" src="Logo_Editada.png" alt="Foto decorativa do projeto" />
+    </div>
+
+    <div class="formulario-login">
+      <h1>Login</h1>
+      <form class="form-login" th:action="@{/login}" th:object="${cadastro}" method="post">
+
+        <label for="usuario">Usuário:</label>
+        <input type="text" id="usuario" th:field="*{email}" required />
+
+        <label for="senha">Senha:</label>
+       <input type="password" id="senha" th:field="*{senha}" required />
+
+        <strong>Quer cadastrar seu ponto de coleta?</strong>
+        <a href="https://docs.google.com/forms/d/1AMODHT8A3evmQUCPCFgjJd5hQoL39SdfYF_-MzuBQ84/edit" target="_blank">Preencha o formulário</a>
+
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>emailexemplopemita@gmail.com</p>
+    <p>&copy; 2025 - All Rights Reserved, PEM-ITA</p>
+  </footer>
+</body>
+</html>

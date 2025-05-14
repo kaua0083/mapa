@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEM-ITA</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="header-div">
+      <div id="img-logo">
+        <a href="/index"><img id="logo" src="Logo_Editada.png" alt="Logo_Pem_Ita"></a>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="/">Mapa</a>
+    <a href="/sobre">Sobre</a>
+    <a href="/info">Informações</a>
+
+    <th:block th:if="${usuarioLogado == null}">
+        <a href="/login">Login</a>
+    </th:block>
+
+    <th:block th:if="${usuarioLogado != null}">
+        <span>Bem-vindo, <strong th:text="${usuarioLogado}"></strong></span>
+        <a href="/logout">Sair</a>
+    </th:block>
+
+    <th:block th:if="${usuarioLogado == 'Ana'}">
+        <a href="/cadastro">Cadastro</a>
+        <a href="/ponto">AddPonto</a>
+    </th:block>
+</nav>
+
+  <section class="sobre-container">
+    <h1 class="titulo-sobre">Reciclagem</h1>
+        <p>
+            A reciclagem envolve várias etapas e é influenciada por diferentes fatores, como o interesse do mercado, os custos envolvidos, as leis de cada região e, acima de tudo, a colaboração das pessoas, que precisam fazer o descarte correto dos materiais. Essa participação é essencial para garantir que o material reciclado tenha boa qualidade. Isso é importante porque os produtos reciclados precisam ser competitivos em relação aos produtos novos no mercado.
+        </p>
+    <div class="texto-sobre">
+      
+
+      <h2>Sobre o material</h2>
+      <label for="material">Escolha um material:</label>
+      <select id="material" onchange="mostrarInfo()">
+        <option value="">--Selecione--</option>
+        <option value="papel">Papel</option>
+        <option value="plastico">Plástico</option>
+        <option value="vidro">Vidro</option>
+        <option value="metal">Metal</option>
+        <option value="outro">Outros</option>
+      </select>
+
+      <div id="info" class="info"></div>
+
+      <script>
+        const dados = {
+          papel: `
+            A reciclagem do <strong>papel</strong> é bastante importante, pois ela diminui os impactos ambientais e reduz o desperdício de recursos.<br>
+            O papel pode ser reciclado até 7 vezes. Sempre separe papel limpo e seco, sem restos de comida.
+            <br><br>
+            <strong>Exemplos de papéis recicláveis:</strong>
+            <ul>
+                              <li>Embalagem de marmitex (alumínio)</li>
+                              <li>Embalagem de ovo</li>
+                              <li>Embalagem de produtos de higiene</li>
+                              <li>Embalagens de produtos de limpeza</li>
+                              <li>Embalagem longa vida</li>
+                              <li>Jornais</li>
+                              <li>Lista telefônica</li>
+                              <li>Papéis de desenho</li>
+                              <li>Papéis de escritório</li>
+                              <li>Papéis de seda</li>
+                              <li>Papéis impressos</li>
+                              <li>Papel alumínio</li>
+                              <li>Papel filtrante</li>
+                              <li>Papel heliográfico</li>
+                              <li>Papel Kraft</li>
+                              <li>Revistas</li>
+                            </ul>
+          `,
+          plastico: `
+            Existem muitos tipos diferentes de <strong>plástico</strong>, com 50 tipos de grupos e várias variações dentro desses grupos. Apenas uma pequena parte desses grupos de plásticos são recicláveis. A maioria dos plásticos não se decompõe por conta própria e demora bastante para se decompor.
+            <br><br>
+            <strong>Exemplos de plásticos recicláveis:</strong>
+             <ul>
+                              <li>Acrílicos</li>
+                              <li>Cápsulas de café</li>
+                              <li>Copos de plásticos</li>
+                              <li>Embalagem de frutas e legumes</li>
+                              <li>Embalagem de marmitex (isopor)</li>
+                              <li>Embalagem de ovo (isopor)</li>
+                              <li>Embalagem de produtos de higiene</li>
+                              <li>Embalagem de produtos de limpeza</li>
+                              <li>Embalagem de refrigerantes</li>
+                              <li>Escovas de cabelo</li>
+                              <li>Frascos de condimento</li>
+                              <li>Frascos de molhos</li>
+                              <li>Garrafas de bebidas alcoólicas e não alcoólicas</li>
+                              <li>Mesas de plástico</li>
+                              <li>Parte exterior de canecas</li>
+                              <li>Potes de plásticos</li>
+                              <li>Potes de produtos alimentícios</li>
+                              <li>Sacos e sacolas</li>
+                              <li>Tampas plásticas</li>
+                              <li>Utensílios de cozinha</li>
+                            </ul>
+          `,
+          vidro: `
+            <strong>Vidros</strong> podem ser reciclados infinitamente. Lave bem os frascos e retire tampas metálicas.
+            <br><br>
+            <strong>Exemplos de vidros recicláveis:</strong>
+            <ul>
+              <li>Cacos de vidro</li>
+              <li>Copos de vidro</li>
+              <li>Frascos de condimento</li>
+              <li>Frascos de molho</li>
+              <li>Frascos de perfume</li>
+              <li>Garrafas de bebidas</li>
+              <li>Luminárias</li>
+              <li>Vidros de automóveis</li>
+              <li>Vidros de janelas</li>
+            </ul>
+          `,
+          metal: `
+            <strong>Metais</strong> são recicláveis sendo eles ferrosos ou não ferrosos. 
+            <br><br>
+            <strong>Exemplos de metais recicláveis:</strong>
+            <ul>
+              <li>Ferragens</li>
+              <li>Fios de cobre</li>
+              <li>Latas de aerossol</li>
+              <li>Latas de azeite</li>
+              <li>Latas de cerveja</li>
+              <li>Latas de óleo</li>
+              <li>Latas de refrigerante</li>
+              <li>Panelas sem cabo</li>
+              <li>Latas de sardinha</li>
+            </ul>
+          `,
+          outro: `
+            <strong>Informações adicionais:</strong>
+            <ul>
+              <li><strong>Óleo de cozinha:</strong> Para reciclar o óleo de cozinha, separe o óleo e armazene-o em um recipiente limpo e seco. O óleo de cozinha só pode ser levado em pontos de reciclagem específicos ou em cooperativas</li>
+              <li><strong>Líquidos:</strong> Separe os resíduos líquidos dos sólidos para não comprometer o processo de reciclagem</li>
+              <li><strong>Resíduos especiais:</strong> Alguns resíduos como produtos químicos, pilhas, lâmpadas e baterias devem ser descartados em pontos específicos, como: farmácias, postos de saúde e eco pontos</li>
+            </ul>
+          `,
+        };
+
+        function mostrarInfo() {
+          const material = document.getElementById('material').value;
+          const info = document.getElementById('info');
+          info.innerHTML = dados[material] || "Selecione um material para ver as informações.";
+        }
+      </script>
+    </div>
+
+    <div class="imagem-sobre">
+      <img class="foto-equipe" src="img/recycle.jpg" alt="Foto da equipe do projeto">
+    </div>
+
+    <div>
+        <h2>Como descartar o material </h2>
+        
+        <ol>
+            <li><strong>Separação:</strong> Separe seus materiais entre recicláveis (papéis, metais, vidro e plásticos) e não recicláveis (restos de comidas no geral)</li>
+            <li><strong>Higienização:</strong> Limpe os materiais recicláveis que ainda tenham algum resto de alimento</li>
+            <li><strong>Embalagem:</strong> Use sacos de lixo adequados para os seus materiais</li>
+            <li><strong>Descarte:</strong> Leve os seus materiais para o centro de reciclagem mais próximo de você</li>
+            
+        </ol>
+    </div>
+
+    <div>
+        <h2>Que destino o lixo tem após a coleta?</h2>
+        <p>
+            Após a coleta, o lixo reciclado é geralmente mandado para uma cooperativa ou para alguma central de triagem, onde os materiais são separados por tipo para serem levados para o processo de reciclagem. O lixo não reciclável como resíduos orgânicos e dejetos são mandados para aterros sanitários, que são locais feitos para minimizar o impacto ambiental. Em alguns casos o lixo orgânico pode ser usado como adubo. No caso de lixo hospitalar, geralmente eles são levados para incineradores apropriados para serem incinerados.
+
+        </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>emailexemplopemita@gmail.com</p>
+    <p>&copy; 2025 - All Rights Reserved, PEM-ITA</p>
+  </footer>
+</body>
+
+</html>

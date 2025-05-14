@@ -1,0 +1,334 @@
+#logo {
+    width: 150px;
+}
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #6e6e5f; 
+    height: 100%;
+    background-color: #fbfbe3;
+    display: flex;
+    flex-direction: column;
+    margin: 0; 
+    padding: 0; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+nav a {
+    color: #fbfbe3; 
+}
+.apresentacao-inicial {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    margin-bottom: 3px; 
+}
+
+.apresentacao-inicial h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.apresentacao-inicial p {
+    font-size: 1rem;
+    max-width: 900px; 
+    line-height: 1.6;
+}
+a {
+    font-family: 'Roboto', sans-serif;
+    color: #3A7D52; 
+    text-decoration: none; 
+    font-weight: normal; 
+    transition: color 0.3s ease; 
+}
+
+a:hover {
+    color: #99C48F; 
+}
+
+header {
+    background-color: #47a35d;
+    height: 150px;
+    margin: 0; 
+    padding: 0; 
+    width: 100%; 
+}
+
+.header-div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%; 
+    max-width: 100%; 
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+nav {
+    background-color: #66B77A;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+section > div {
+    width: 1600px;
+    max-width: 2000px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; 
+}
+
+section > div > h1 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px; 
+}
+
+/* Mapa*/
+#map {
+    height: 700px; 
+    width: 100%;
+    z-index: 1; 
+}
+
+.popup-img {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin-top: 5px;
+}
+
+#search-container {
+    margin: 10px 0;
+    position: absolute; 
+    right: 0; 
+    top: 50px; 
+    z-index: 2; 
+}
+
+footer {
+    background-color: #092b2c;
+    color: #fbfbe3; 
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 14px;
+}
+
+/* Pagina sobre*/
+
+.sobre-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    max-width: 700px;
+    margin: 0 auto; /* centraliza a div na página */
+    padding: 20px;
+    flex-wrap: wrap; /* importante pra adaptar em telas pequenas */
+    margin-top: 40px;
+    margin-bottom: 200px;
+}
+
+.texto-sobre {
+    flex: 1.5;
+    font-size: 16px;
+    line-height: 1.6;
+    width: 200px;
+}
+
+.imagem-sobre {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 250px;
+}
+
+.titulo-sobre {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.foto-equipe {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.login-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+}
+
+.formulario-login {
+    flex: 1.5;
+    min-width: 250px;
+}
+
+.titulo-login {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Pagina login*/
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 40px 20px;
+    margin-top: 50px;
+    margin-bottom: 80px;
+  }
+  
+  .imagem-login {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 250px;
+  }
+  
+  .foto-login {
+    width: 500px;
+    max-width: 1000px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    background: linear-gradient(
+      to right,
+      rgba(71, 163, 93, 0.6) 30%,
+      rgba(251, 251, 227, 0.1) 100%
+    );
+  }
+  
+  .formulario-login {
+    flex: 1;
+    max-width: 700px;
+    width: 100%;
+    margin-left: 160px;
+  }
+  
+  .form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form-login label {
+    font-weight: 500;
+    color: #6e6e5f;
+  }
+  
+  .form-login input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+button {
+    background-color: #092b2c;
+    color: #fbfbe3;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #3A7D52;
+  }
+
+/* Página de detalhes específica */
+.pagina-detalhes {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+    display: block; /* Adicionando display block para garantir que os itens fiquem empilhados */
+}
+
+/* Título da página */
+.pagina-detalhes .titulo-detalhes {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Seção da imagem */
+.pagina-detalhes .imagem-ponto {
+    text-align: center;
+    margin-bottom: 20px;
+    display: block; /* Forçar a imagem a ser exibida como um bloco */
+}
+
+.pagina-detalhes .imagem-ponto img {
+    width: 100%; /* Ajusta para que a imagem ocupe toda a largura disponível */
+    max-width: 100%; /* Impede que a imagem ultrapasse a largura do container */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 10px;
+    display: block; /* Garante que a imagem se comporte como um bloco */
+    margin: 0 auto; /* Centraliza a imagem */
+}
+
+/* Seção de dados */
+.pagina-detalhes .dados-ponto {
+    margin-bottom: 20px;
+    font-size: 16px;
+    display: block; /* Garantir que os dados fiquem empilhados verticalmente */
+}
+
+/* Tabela de valores */
+
+
+  .valores-materiais {
+    display: block;
+    width: 100%;
+}
+.form-cadastro  {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+

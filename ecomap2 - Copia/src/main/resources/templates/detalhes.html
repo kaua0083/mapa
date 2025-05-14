@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PEM-ITA</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="header-div">
+      <div id="img-logo">
+        <a href="index.html"><img id="logo" src="Logo_Editada.png" alt="Logo_Pem_Ita"></a>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="/">Mapa</a>
+    <a href="/sobre">Sobre</a>
+    <a href="/info">Informações</a>
+
+    <th:block th:if="${usuarioLogado == null}">
+        <a href="/login">Login</a>
+    </th:block>
+
+    <th:block th:if="${usuarioLogado != null}">
+        <span>Bem-vindo, <strong th:text="${usuarioLogado}"></strong></span>
+        <a href="/logout">Sair</a>
+    </th:block>
+
+    <th:block th:if="${usuarioLogado == 'Ana'}">
+        <a href="/cadastro">Cadastro</a>
+        <a href="/ponto">AddPonto</a>
+    </th:block>
+</nav>
+  <section class="pagina-detalhes">
+    <div >
+    <h1 class="titulo-detalhes">Ponto de Coleta ReciclaMais</h1>
+
+    <div class="imagem-ponto">
+      <img src="img/ponto-coleta.jpg" alt="" />
+    </div>
+
+    <div class="valores-materiais">
+      <p><strong>Endereço:</strong> Rua das Palmeiras, 123 - Centro, Itapetininga - SP</p>
+      <p><strong>Telefone:</strong> (15) 99999-9999</p>
+    </div>
+
+    <div >
+      <h2>Valores pagos por material</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Material</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Papel</td>
+            <td>R$ 0,20/kg</td>
+          </tr>
+          <tr>
+            <td>Plástico</td>
+            <td>R$ 0,50/kg</td>
+          </tr>
+          <tr>
+            <td>Vidro</td>
+            <td>R$ 0,10/kg</td>
+          </tr>
+          <tr>
+            <td>Metal</td>
+            <td>R$ 1,00/kg</td>
+          </tr>
+          <tr>
+            <td>Óleo de cozinha</td>
+            <td>R$ 0,80/L</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </section>
+
+  <footer>
+    <p>emailexemplopemita@gmail.com</p>
+    <p>&copy; 2025 - All Rights Reserved, PEM-ITA</p>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEM-ITA</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<header>
+    <div class="header-div">
+        <div id="img-logo">
+            <a href="/"><img id="logo" src="/Logo_Editada.png" alt="Logo_Pem_Ita"></a>
+        </div>
+    </div>
+</header>
+
+<nav>
+    <a href="/">Mapa</a>
+    <a href="/sobre">Sobre</a>
+    <a href="/info">Informações</a>
+
+    <th:block th:if="${usuarioLogado == null}">
+        <a href="/login">Login</a>
+    </th:block>
+
+    <th:block th:if="${usuarioLogado != null}">
+        <span>Bem-vindo, <strong th:text="${usuarioLogado}"></strong></span>
+        <a href="/logout">Sair</a>
+    </th:block>
+
+    <th:block th:if="${usuarioLogado == 'Ana'}">
+        <a href="/cadastro">Cadastro</a>
+        <a href="/ponto">AddPonto</a>
+    </th:block>
+</nav>
+
+
+<section>
+    <div>
+        <h1>Mapa com locais de coleta</h1>
+        <div id="search-container">
+            <input type="text" id="search" placeholder="Buscar bairro, vila ou local marcado..." />
+            <button onclick="searchMarker()">Buscar</button>
+        </div>
+
+        <div id="map" style="height: 600px;"></div>
+
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script>
+            const map = L.map('map', {
+                center: [-23.5886, -48.0488],
+                zoom: 13,
+                minZoom: 12,
+                maxBounds: L.latLngBounds(
+                    [-23.65, -48.15],
+                    [-23.52, -47.95]
+                ),
+                maxBoundsViscosity: 1.0
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            let busca = {};
+            async function carregarLocais() {
+                try {
+                    const resposta = await fetch("/pontos");
+                    const locais = await resposta.json();
+
+                    locais.forEach(local => {
+                        const marker = L.marker(local.coordenadas).addTo(map)
+                            .bindPopup(local.popup);
+
+                        busca[local.nome.toLowerCase()] = marker;
+                        local.aliases.forEach(alias => {
+                            busca[alias.toLowerCase()] = marker;
+                        });
+                    });
+
+                } catch (erro) {
+                    console.error("Erro ao buscar os dados:", erro);
+                }
+            }
+
+            function searchMarker() {
+                const termo = document.getElementById('search').value.trim().toLowerCase();
+
+                if (busca[termo]) {
+                    map.setView(busca[termo].getLatLng(), 15);
+                    busca[termo].openPopup();
+                    return;
+                }
+
+                const entradaParcial = Object.entries(busca).find(([nome]) => nome.includes(termo));
+                if (entradaParcial) {
+                    const marker = entradaParcial[1];
+                    map.setView(marker.getLatLng(), 15);
+                    marker.openPopup();
+                } else {
+                    alert("Local não encontrado. Tente nome de um bairro ou vila cadastrada.");
+                }
+            }
+
+            carregarLocais();
+        </script>
+    </div>
+</section>
+
+<footer>
+    <p>emailexemplopemita@gmail.com</p>
+    <p>&copy; 2025 - All Rights Reserved, PEM-ITA</p>
+</footer>
+</body>
+</html>
